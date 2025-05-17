@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8" />
+  <title>السلة</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <img src="Y.G.jpg" alt="شعار الشركة" class="logo">
+    <h1>السلة</h1>
+    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+    <nav class="navbar" id="navMenu">
+      <ul class="menu">
+        <li><a href="index.html">الرئيسية</a></li>
+        <li><a href="products.html">المنتجات</a></li>
+        <li><a href="cart.html">السلة</a></li>
+        <li><a href="contact.html">اتصل بنا</a></li>
+        <li><a href="event.html">الحدث</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="center-content">
+    <h2>المنتجات في السلة</h2>
+    <div id="cartItems"></div>
+    <p id="totalPrice">الإجمالي: 0</p>
+  </main>
+
+  <footer>
+    <p>&copy; غزّل </p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

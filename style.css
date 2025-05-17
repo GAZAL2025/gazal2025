@@ -1,0 +1,198 @@
+/* إعدادات أساسية */
+body {
+  font-family: 'Tahoma', sans-serif;
+  direction: rtl;
+  margin: 0;
+  padding: 0;
+  background-color: #f7f7f7;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+header, footer {
+  background-color: #333;
+  color: white;
+  padding: 15px;
+  text-align: center;
+  position: relative;
+}
+
+main {
+  flex: 1;
+  padding: 20px;
+}
+
+/* شريط التنقل */
+nav {
+  background-color: #f3f3f3;
+  padding: 10px 20px;
+  position: relative;
+  text-align: center;
+  display: flex;
+  justify-content: center; /* لمحاذاة القائمة في المنتصف بالشاشات الكبيرة */
+  align-items: center;
+}
+
+/* زر القائمة */
+.menu-toggle {
+  display: none;
+  font-size: 26px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  position: absolute;
+  right: 20px;
+  top: 15px;
+  color: #333;
+  z-index: 1100;
+}
+
+/* القائمة */
+#navMenu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: nowrap;
+}
+
+#navMenu li {
+  display: inline-block;
+}
+
+#navMenu li a {
+  text-decoration: none;
+  color: #333;
+  padding: 8px 12px;
+  display: block;
+}
+
+/* تأثير عند تحويم الماوس */
+#navMenu li a:hover {
+  background-color: #ddd;
+  border-radius: 4px;
+}
+
+/* المنتجات */
+.product, .cart-item {
+  background-color: white;
+  border: 1px solid #ddd;
+  padding: 15px;
+  margin: 10px;
+  border-radius: 8px;
+  width: 250px;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.product img, .cart-item img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+
+.products-grid, #cartItems {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 15px;
+}
+
+/* نموذج إضافة منتج */
+form {
+  margin-bottom: 30px;
+  background: #fff;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+
+form input, form button {
+  margin-top: 10px;
+  padding: 10px;
+  font-size: 16px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+form button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+form button:hover {
+  background-color: #45a049;
+}
+
+/* تذييل */
+footer {
+  margin-top: auto;
+}
+
+/* التعليقات */
+.comment-box {
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 8px;
+  margin: 10px;
+  width: calc(50% - 20px);
+  display: inline-block;
+  vertical-align: top;
+  box-sizing: border-box;
+}
+
+/* توسيط المحتوى */
+.center-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+/* شعار */
+.logo {
+  height: 50px;
+  position: absolute;
+  left: 20px;
+  top: 15px;
+}
+
+/* الهواتف فقط */
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+  }
+
+  #navMenu {
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    right: -250px; /* مخفية خارج الشاشة */
+    width: 250px;
+    height: 100%;
+    background-color: #fff;
+    box-shadow: -2px 0 5px rgba(0,0,0,0.1);
+    padding-top: 60px;
+    gap: 15px;
+    transition: right 0.3s ease;
+    align-items: flex-start;
+    justify-content: flex-start;
+    z-index: 1000;
+  }
+
+  #navMenu li {
+    width: 100%;
+    padding: 10px 20px;
+    display: block;
+  }
+
+  #navMenu.show {
+    right: 0; /* تظهر القائمة */
+  }
+}

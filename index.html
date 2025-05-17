@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8" />
+  <title>الرئيسية</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <img src="Y.G.jpg" alt="شعار الشركة" class="logo">
+    <h1>غزّل</h1>
+    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+    <nav class="navbar" id="navMenu">
+      <ul class="menu">
+        <li><a href="index.html">الرئيسية</a></li>
+        <li><a href="products.html">المنتجات</a></li>
+        <li><a href="cart.html">السلة</a></li>
+        <li><a href="contact.html">اتصل بنا</a></li>
+        <li><a href="event.html">الحدث</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="center-content">
+    <section>
+      <h2>تعليقات العملاء</h2>
+      <div id="commentsContainer"></div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; غزّل</p>
+  </footer>
+
+  <script>
+    const comments = JSON.parse(localStorage.getItem('comments')) || [];
+    const container = document.getElementById('commentsContainer');
+
+    comments.forEach(({ name, message }) => {
+      const div = document.createElement('div');
+      div.className = 'comment-box';
+      div.innerHTML = `<strong>${name}</strong><p>${message}</p>`;
+      container.appendChild(div);
+    });
+  window.onload = function() {
+    alert("مرحبًا بك في موقعنا! نحن سعداء بزيارتك 🌟");
+  };
+  </script>
+</body>
+</html>
