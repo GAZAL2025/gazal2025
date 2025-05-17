@@ -126,38 +126,6 @@ function removeFromCart(id) {
   displayCartItems();
 }
 
-// العد التنازلي للحدث
-const eventDate = new Date("2025-05-21T10:00:00");
-
-function updateCountdown() {
-  const countdownEl = document.getElementById("countdown");
-  if (!countdownEl) return;
-
-  const now = new Date();
-  const diff = eventDate - now;
-
-  if (diff <= 0) {
-    countdownEl.innerText = "لقد بدأ الحدث!";
-    return;
-  }
-
-  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-  const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-  const minutes = Math.floor((diff / (1000 * 60)) % 60);
-  const seconds = Math.floor((diff / 1000) % 60);
-
-  countdownEl.innerText = `${days} يوم ${hours} ساعة ${minutes} دقيقة ${seconds} ثانية`;
-}
-
-// تشغيل العد التنازلي تلقائيًا
-document.addEventListener('DOMContentLoaded', () => {
-  if (document.getElementById('countdown')) {
-    updateCountdown();
-    setInterval(updateCountdown, 1000);
-  }
-});
-
-
 // القائمة الجانبية
 function toggleMenu() {
   const menu = document.getElementById("navMenu");
