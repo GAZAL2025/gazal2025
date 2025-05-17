@@ -2,35 +2,118 @@
 <html lang="ar">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>من نحن</title>
-  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      font-family: 'Tahoma', sans-serif;
+      direction: rtl;
+      margin: 0;
+      padding: 0;
+      background-color: #f7f7f7;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header, footer {
+      background-color: #333;
+      color: white;
+      padding: 15px;
+      text-align: center;
+      position: relative;
+    }
+    main {
+      flex: 1;
+      padding: 20px;
+    }
+    nav.navbar {
+      background-color: #f3f3f3;
+      padding: 10px 20px;
+      position: relative;
+      text-align: center;
+    }
+    .menu-toggle {
+      display: none;
+      font-size: 26px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      position: absolute;
+      right: 20px;
+      top: 15px;
+      color: #333;
+      z-index: 1100;
+    }
+    #navMenu {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: nowrap;
+    }
+    #navMenu li {
+      display: inline-block;
+    }
+    #navMenu li a {
+      text-decoration: none;
+      color: #333;
+      padding: 8px 12px;
+      display: block;
+    }
+    #navMenu li a:hover {
+      background-color: #ddd;
+      border-radius: 4px;
+    }
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: block;
+      }
+      #navMenu {
+        flex-direction: column;
+        position: fixed;
+        top: 0;
+        right: -250px;
+        width: 250px;
+        height: 100%;
+        background-color: #fff;
+        box-shadow: -2px 0 5px rgba(0,0,0,0.1);
+        padding-top: 60px;
+        gap: 15px;
+        transition: right 0.3s ease;
+        align-items: flex-start;
+        justify-content: flex-start;
+        z-index: 1000;
+      }
+      #navMenu.show {
+        right: 0;
+      }
+      #navMenu li {
+        width: 100%;
+        padding: 10px 20px;
+        display: block;
+      }
+    }
+  </style>
 </head>
 <body>
   <header>
-    <img src="Y.G.jpg" alt="شعار الشركة" class="logo">
+    <img src="Y.G.jpg" alt="شعار الشركة" class="logo" style="position:absolute; left:20px; top:15px; height:50px;">
     <h1>من نحن</h1>
   </header>
-<nav class="navbar">
-  <button class="menu-toggle" onclick="toggleMenu()">☰</button>
-  <ul id="navMenu" class="menu">
-    <li><a href="index.html">الرئيسية</a></li>
-    <li><a href="products.html">المنتجات</a></li>
-    <li><a href="about.html">عنا</a></li>
-    <li><a href="cart.html">السلة</a></li>
-    <li><a href="contact.html">اتصل بنا</a></li>
-    <li><a href="event.html">الحدث</a></li>
-  </ul>
-</nav>
 
-<main class="center-content">
-  <p>نحن شركة متخصصة في بيع منتجات الصوف اليدوية بجودة عالية وبأسلوب تقليدي مميز.</p>
-</main>
-
-<footer>
-  <p>&copy; غزّل</p>
-</footer>
-
-<script src="countdown.js"></script>
+  <nav class="navbar">
+    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+    <ul id="navMenu" class="menu">
+      <li><a href="index.html">الرئيسية</a></li>
+      <li><a href="products.html">المنتجات</a></li>
+      <li><a href="about.html">عنا</a></li>
+      <li><a href="cart.html">السلة</a></li>
+      <li><a href="contact.html">اتصل بنا</a></li>
+      <li><a href="event.html">الحدث</a></li>
+    </ul>
+  </nav>
 
   <main class="center-content">
     <p>نحن شركة متخصصة في بيع منتجات الصوف اليدوية بجودة عالية وبأسلوب تقليدي مميز.</p>
@@ -39,6 +122,12 @@
   <footer>
     <p>&copy; غزّل</p>
   </footer>
-  <script src="countdown.js"></script>
+
+  <script>
+    function toggleMenu() {
+      const navMenu = document.getElementById('navMenu');
+      navMenu.classList.toggle('show');
+    }
+  </script>
 </body>
 </html>
