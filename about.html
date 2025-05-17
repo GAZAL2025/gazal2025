@@ -8,22 +8,23 @@
  <meta name="viewport" content="width=device-width, initial-scale=1" />
 </head>
 <body>
- <header>
-  <img src="Y.G.jpg" alt="شعار الشركة" class="logo">
-  <h1>من نحن</h1>
-  <button class="menu-toggle" onclick="toggleMenu()">☰</button>
-  <nav id="navMenu" class="navbar">
-    <ul class="menu">
-      <li><a href="index.html">الرئيسية</a></li>
-      <li><a href="products.html">المنتجات</a></li>
-      <li><a href="about.html">عنا</a></li>
-      <li><a href="cart.html">السلة</a></li>
-      <li><a href="contact.html">اتصل بنا</a></li>
-      <li><a href="event.html">الحدث</a></li>
-    </ul>
-  </nav>
-</header>
-  <main class="center-content">
+ <header> <header>
+    <img src="Y.G.jpg" alt="شعار الشركة" class="logo" />
+    <h1>من نحن</h1>
+    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+    <nav id="navMenu" class="navbar">
+      <ul class="menu">
+        <li><a href="index.html">الرئيسية</a></li>
+        <li><a href="products.html">المنتجات</a></li>
+        <li><a href="about.html">عنا</a></li>
+        <li><a href="cart.html">السلة</a></li>
+        <li><a href="contact.html">اتصل بنا</a></li>
+        <li><a href="event.html">الحدث</a></li>
+      </ul>
+    </nav>
+  </header>
+
+   <main class="center-content">
     <p>نحن شركة متخصصة في بيع منتجات الصوف اليدوية بجودة عالية وبأسلوب تقليدي مميز.</p>
    <p>انشائنا هذا الموقع ليكون المشروع الذي سنقدمة للفصل الدراسي الثالث لمادة التقنية الرقمية</p>
   </main>
@@ -31,6 +32,13 @@
   <footer>
     <p>&copy; غزّل</p>
   </footer>
-  <script src="countdown.js"></script>
+
+  <script>
+    function toggleMenu() {
+      const navMenu = document.getElementById('navMenu');
+      navMenu.classList.toggle('show');
+    }
+  </script>
+
 </body>
 </html 
