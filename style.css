@@ -166,7 +166,16 @@ footer {
 /* الهواتف فقط */
 @media (max-width: 768px) {
   .menu-toggle {
-    display: block;
+    display: block;  /* زر القائمة يظهر */
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 26px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    color: #333;
+    z-index: 1100;
   }
 
   #navMenu {
@@ -186,13 +195,13 @@ footer {
     z-index: 1000;
   }
 
+  #navMenu.show {
+    right: 0; /* تظهر القائمة عند اضافة الصنف */
+  }
+
   #navMenu li {
     width: 100%;
     padding: 10px 20px;
     display: block;
-  }
-
-  #navMenu.show {
-    right: 0; /* تظهر القائمة */
   }
 }
