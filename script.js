@@ -126,7 +126,7 @@ function removeFromCart(id) {
   displayCartItems();
 }
 
-// القائمة الجانبية
+// القائمة الجانبية (الهامبرجر)
 function toggleMenu() {
   const menu = document.getElementById("navMenu");
   if (menu) menu.classList.toggle("show");
