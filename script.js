@@ -126,38 +126,37 @@ function removeFromCart(id) {
   displayCartItems();
 }
 
-// العد التنازلي
+// العد التنازلي للحدث
 const eventDate = new Date("2025-05-21T10:00:00");
+
 function updateCountdown() {
-  const el = document.getElementById("countdown");
-  if (!el) return;
+  const countdownEl = document.getElementById("countdown");
+  if (!countdownEl) return;
 
   const now = new Date();
   const diff = eventDate - now;
 
   if (diff <= 0) {
-    el.innerText = "لقد بدأ الحدث!";
+    countdownEl.innerText = "لقد بدأ الحدث!";
     return;
   }
 
-  const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-  const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
-  const m = Math.floor((diff / (1000 * 60)) % 60);
-  const s = Math.floor((diff / 1000) % 60);
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+  const minutes = Math.floor((diff / (1000 * 60)) % 60);
+  const seconds = Math.floor((diff / 1000) % 60);
 
-  el.innerText = `${d} يوم ${h} ساعة ${m} دقيقة ${s} ثانية`;
+  countdownEl.innerText = `${days} يوم ${hours} ساعة ${minutes} دقيقة ${seconds} ثانية`;
 }
 
-// تشغيل تلقائي
-document.addEventListener("DOMContentLoaded", () => {
-  displayProducts();
-  displayCartItems();
-
-  if (document.getElementById("countdown")) {
+// تشغيل العد التنازلي تلقائيًا
+document.addEventListener('DOMContentLoaded', () => {
+  if (document.getElementById('countdown')) {
     updateCountdown();
     setInterval(updateCountdown, 1000);
   }
 });
+
 
 // القائمة الجانبية
 function toggleMenu() {
