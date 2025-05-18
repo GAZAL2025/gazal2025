@@ -128,12 +128,12 @@ function removeFromCart(id) {
 
 
 //تجربتي
-function myFunction() {
-  var x = document.getElementById("myMenu");
-  if (x.className === "menu"){
-    x.className += "responsive";
+function myFunction(){
+  var x=document.getElementById("myMenu");
+  if (x.className==="menu"){
+    x.className+="responsive";
   }
   else{
-    x.className = "menu";
+    x.className="menu";
   }
 }
