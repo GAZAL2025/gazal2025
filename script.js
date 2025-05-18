@@ -126,8 +126,14 @@ function removeFromCart(id) {
   displayCartItems();
 }
 
-function toggleMenu() {
-  const navMenu = document.getElementById('navMenu');
-  navMenu.classList.toggle('show');
-}
 
+//تجربتي
+function myFunction() {
+  var x = document.getElementById("myMenu");
+  if (x.className === "menu"){
+    x.className += "responsive";
+  }
+  else{
+    x.className = "menu";
+  }
+}
