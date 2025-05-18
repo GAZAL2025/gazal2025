@@ -163,45 +163,30 @@ footer {
   top: 15px;
 }
 
-/* الهواتف فقط */
-@media (max-width: 768px) {
-  .menu-toggle {
-    display: block;  /* زر القائمة يظهر */
-    position: absolute;
-    top: 15px;
-    right: 20px;
-    font-size: 26px;
-    cursor: pointer;
-    background: none;
-    border: none;
-    color: #333;
-    z-index: 1100;
+.menu .icon {
+  display: none;
+}
+@media screen and (max-width:700px){
+  .menu li a {
+    display: none;
+    text-align: center;
   }
-
-  #navMenu {
-    flex-direction: column;
-    position: fixed;
-    top: 0;
-    right: -250px; /* مخفية خارج الشاشة */
-    width: 250px;
-    height: 100%;
-    background-color: #fff;
-    box-shadow: -2px 0 5px rgba(0,0,0,0.1);
-    padding-top: 60px;
-    gap: 15px;
-    transition: right 0.3s ease;
-    align-items: flex-start;
-    justify-content: flex-start;
-    z-index: 1000;
-  }
-
-  #navMenu.show {
-    right: 0; /* تظهر القائمة عند اضافة الصنف */
-  }
-
-  #navMenu li {
-    width: 100%;
-    padding: 10px 20px;
+  .menu .icon {
+    float: left;
     display: block;
+  }
+}
+@media screen and (max-width:700px) {
+  .menu.responsive {
+    position: relative;
+  }
+  .menu.responsive .icon {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+  .menu.responsive a {
+    display: block;
+    text-align: center;
   }
 }
