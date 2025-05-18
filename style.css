@@ -76,45 +76,41 @@ main {
   text-align: center;
 }
 
-/* الهواتف فقط */
+.menu-toggle {
+  display: none;
+  font-size: 26px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  position: absolute;
+  right: 20px;
+  top: 15px;
+  z-index: 1100;
+}
+
+#navMenu {
+  display: flex;
+  gap: 20px;
+}
+
 @media (max-width: 768px) {
   .menu-toggle {
     display: block;
   }
 
-  .navbar {
+  #navMenu {
+    flex-direction: column;
     position: fixed;
     top: 0;
     right: -250px;
     width: 250px;
     height: 100%;
     background-color: #fff;
-    box-shadow: -2px 0 5px rgba(0,0,0,0.1);
     padding-top: 60px;
     transition: right 0.3s ease;
-    z-index: 1000;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
   }
 
-  .navbar.show {
+  #navMenu.show {
     right: 0;
-  }
-
-  .menu {
-    flex-direction: column;
-    width: 100%;
-    gap: 0;
-  }
-
-  .menu li {
-    width: 100%;
-    padding: 10px 20px;
-  }
-
-  .menu li a {
-    width: 100%;
-    padding: 12px 0;
   }
 }
