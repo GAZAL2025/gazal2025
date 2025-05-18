@@ -10,17 +10,23 @@
   <header>
     <img src="Y.G.jpg" alt="شعار الشركة" class="logo">
     <h1>غزّل</h1>
-    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
-  <nav class="navbar">
-    <ul id="navMenu" class="menu">
-      <li><a href="index.html">الرئيسية</a></li>
-      <li><a href="products.html">المنتجات</a></li>
-      <li><a href="about.html">عنا</a></li>
-      <li><a href="cart.html">السلة</a></li>
-      <li><a href="contact.html">اتصل بنا</a></li>
-      <li><a href="event.html">الحدث</a></li>
-    </ul>
-  </nav>
+   <nav class="navbar">
+      <div class="navbar__container">
+        <a href="index.html" id="navbar__logo">غزّل</a>
+        <div class="navbar__toggle" id="mobile-menu">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </div>
+        <ul class="navbar__menu">
+          <li class="navbar_item"><a href="index.html" class="navbar_links">الرئيسية</a></li>
+          <li class="navbar_item"><a href="products.html" class="navbar_links">المنتجات</a></li>
+          <li class="navbar_item"><a href="about.html" class="navbar_links">من نحن</a></li>
+          <li class="navbar_item"><a href="cart.html" class="navbar_links">السلة</a></li>
+          <li class="navbar_item"><a href="contact.html" class="navbar_links">اتصل بنا</a></li>
+          <li class="navbar_item"><a href="event.html" class="navbar_links">الحدث</a></li>
+        </ul>
+      </div>
     </nav>
   </header>
 
