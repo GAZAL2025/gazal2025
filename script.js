@@ -16,6 +16,9 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const productsRef = collection(db, "products");
 
+// عرض المنتجات عند تحميل الصفحة
+window.onload = displayProducts;
+
 // عرض المنتجات
 async function displayProducts() {
   const container = document.getElementById("productList");
@@ -77,7 +80,7 @@ async function deleteProduct(productId) {
   displayProducts();
 }
 
-// السلة محلياً (بدون Firestore)
+// السلة محلياً
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
 function saveCart() {
@@ -126,17 +129,11 @@ function removeFromCart(id) {
   displayCartItems();
 }
 
-
+// قائمة الهامبرغر للجوال
 const menu = document.querySelector('#mobile-menu');
 const menuLinks = document.querySelector('.navbar__menu');
 
-const mobileMenu = () => {
+menu?.addEventListener('click', () => {
   menu.classList.toggle('is-active');
   menuLinks.classList.toggle('active');
-}
-
-menu.addEventListener('click', mobileMenu);
-
-function myFunction() {
-  document.getElementById("demo").innerHTML = "Hello World";
-}
+});
