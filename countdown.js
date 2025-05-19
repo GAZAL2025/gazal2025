@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
   const countdownElement = document.getElementById("countdown");
 
-  const eventDate = new Date("2025-05-30T10:00:00").getTime(); // التاريخ الصحيح
+  const eventDate = new Date("2025-05-21T10:00:00").getTime(); // التاريخ الصحيح
   const updateCountdown = () => {
     const now = new Date().getTime();
     const diff = eventDate - now;
