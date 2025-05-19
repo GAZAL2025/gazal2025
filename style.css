@@ -1,57 +1,116 @@
-/* إعدادات عامة */
+/* ملف style.css */
 body {
+  height: 100%;
   margin: 0;
   padding: 0;
-  font-family: 'Arial', sans-serif;
+  display: flex;
+  flex-direction: column;
   direction: rtl;
+  min-height: 100vh;
+  background-color: #f7f7f7;
 }
 
-/* الشعار */
-#navbar__logo img {
-  height: 45px;
-  margin: 5px 10px;
-}
-
-/* شريط التنقل */
-.navbar {
+header {
   background-color: #333;
-  padding: 10px 20px;
-}
-
-.navbar__container {
+  color: white;
+  padding: 15px 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+main {
+  flex: 1;
+  padding: 100px 20px 20px; /* padding-top معدلة لتفادي تغطية الهيدر */
+  text-align: center;
+}
+
+.site-header {
+  background-color: #222;
+  color: white;
+}
+
+.header-title {
+  text-align: center;
+  padding: 5px 0;
+}
+
+.header-title h1 {
+  margin: 10px 0;
+  color: white;
+  font-family: 24px;
+}
+
+.navbar {
+  width: 100%;
+  background-color: #333;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.navbar__container {
+  width: 100%;
+  max-width: 1200px;
+  padding: 10px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  direction: rtl;
+  text-align: center;
+}
+
+#navbar__logo {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  position: absolute;
+  top: 10px;
+  left: 20px;
+}
+
+#navbar__logo img {
+  width: 60px;
+  height: 45px;
+  margin: 10px;
+  background: none;
 }
 
 .navbar__menu {
   display: flex;
   list-style: none;
-  margin: 0 auto;
+  gap: 20px;
+  margin: 0;
   padding: 0;
   justify-content: center;
-  flex-grow: 1;
-}
-
-.navbar_item {
-  margin: 0 10px;
 }
 
 .navbar_links {
   color: white;
   text-decoration: none;
-  padding: 8px 12px;
+  font-size: 16px;
+}
+
+.menu li a {
+  text-decoration: none;
+  color: white;
+  padding: 8px 16px;
   display: block;
-  transition: background-color 0.3s;
+  width: 100%;
 }
 
-.navbar_links:hover {
-  background-color: #555;
-  border-radius: 5px;
+.menu li a:hover {
+  background-color: #333;
+  border-radius: 4px;
 }
 
-/* زر القائمة للهاتف */
 .navbar__toggle {
   display: none;
   flex-direction: column;
@@ -59,38 +118,38 @@ body {
 }
 
 .bar {
-  height: 3px;
   width: 25px;
+  height: 3px;
   background-color: white;
   margin: 4px 0;
 }
 
-/* الوضع في الجوال */
+/* responsive */
 @media screen and (max-width: 768px) {
   .navbar__toggle {
     display: flex;
   }
 
   .navbar__menu {
+    display: none;
     flex-direction: column;
+    background-color: #333;
+    width: 100%;
     position: absolute;
     top: 60px;
     right: 0;
-    width: 100%;
-    background-color: #333;
-    display: none;
+    text-align: center;
   }
 
   .navbar__menu.active {
     display: flex;
   }
+}
 
-  .navbar_item {
-    text-align: center;
-    margin: 10px 0;
-  }
-
-  .navbar__container {
-    justify-content: space-between;
-  }
+footer {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  margin-top: auto;
 }
