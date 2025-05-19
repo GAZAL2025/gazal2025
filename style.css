@@ -1,150 +1,28 @@
-/* إعدادات أساسية */
 body {
-  font-family: 'Tahoma', sans-serif;
-  direction: rtl;
   margin: 0;
-  padding: 0;
-  background-color: #f7f7f7;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-
-header, footer {
-  background-color: #333;
-  color: white;
-  padding: 15px;
-  text-align: center;
-  position: relative;
-}
-.header-area .logo {
-  width: 300px;
-  padding: 15px;
-  font-weight: bold;
-}
-
-main {
-  flex: 1;
-  padding: 20px;
-}
-
-
-
-/* تأثير عند تحويم الماوس */
-#navMenu li a:hover {
-  background-color: #ddd;
-  border-radius: 4px;
-}
-
-/* المنتجات */
-.product, .cart-item {
-  background-color: white;
-  border: 1px solid #ddd;
-  padding: 15px;
-  margin: 10px;
-  border-radius: 8px;
-  width: 250px;
-  box-sizing: border-box;
-  text-align: center;
-}
-
-.product img, .cart-item img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 4px;
-}
-
-.products-grid, #cartItems {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  gap: 15px;
-}
-
-/* نموذج إضافة منتج */
-form {
-  margin-bottom: 30px;
-  background: #fff;
-  padding: 15px;
-  border-radius: 8px;
-  box-shadow: 0 0 5px rgba(0,0,0,0.1);
-}
-
-form input, form button {
-  margin-top: 10px;
-  padding: 10px;
-  font-size: 16px;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-form button {
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  cursor: pointer;
-}
-
-form button:hover {
-  background-color: #45a049;
-}
-
-/* تذييل */
-footer {
-  margin-top: auto;
-}
-
-/* التعليقات */
-.comment-box {
-  background-color: #fff;
-  padding: 10px;
-  border-radius: 8px;
-  margin: 10px;
-  width: calc(50% - 20px);
-  display: inline-block;
-  vertical-align: top;
-  box-sizing: border-box;
-}
-
-/* توسيط المحتوى */
-.center-content {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  text-align: center;
-}
-
-/* شعار */
-.logo {
-  height: 50px;
-  position: absolute;
-  left: 20px;
-  top: 15px;
+  font-family: 'Arial', sans-serif;
+  direction: rtl;
 }
 
 .navbar {
-  background: #333;
-  height: 60px;
+  background-color: #222;
+  height: 80px;
   display: flex;
   align-items: center;
-  justify-content: center;
-  font-family: Tahoma, sans-serif;
-  direction: rtl;
+  justify-content: space-between;
+  padding: 0 20px;
+  position: relative;
 }
 
 .navbar__container {
-  display: flex;
-  justify-content: space-between;
-  height: 60px;
   width: 100%;
-  max-width: 1200px;
-  padding: 0 20px;
+  display: flex;
   align-items: center;
+  justify-content: space-between;
 }
 
 #navbar__logo {
-  color: white;
+  color: #fff;
   font-size: 24px;
   text-decoration: none;
   font-weight: bold;
@@ -153,78 +31,70 @@ footer {
 .navbar__menu {
   display: flex;
   list-style: none;
-  gap: 15px;
-  margin: 0;
 }
 
 .navbar_item {
-  height: 60px;
+  margin: 0 10px;
 }
 
 .navbar_links {
-  color: white;
+  color: #fff;
   text-decoration: none;
-  padding: 20px 10px;
-  display: block;
-  transition:  0.3s;
+  font-size: 18px;
+  padding: 10px 15px;
 }
 
-.navbar_links:hover {
-  background-color: #555;
-  border-radius: 4px;
-}
-
-/* زر الهامبرغر */
 .navbar__toggle {
   display: none;
-  flex-direction: column;
   cursor: pointer;
 }
 
 .bar {
-  height: 3px;
+  display: block;
   width: 25px;
-  background-color: white;
-  margin: 4px 0;
-  transition: all 0.3s;
+  height: 3px;
+  margin: 5px auto;
+  background-color: #fff;
+  transition: 0.3s;
 }
 
-/* الهواتف */
+/* Responsive */
 @media screen and (max-width: 768px) {
   .navbar__toggle {
-    display: flex;
+    display: block;
   }
 
   .navbar__menu {
     position: absolute;
-    top: 60px;
-    right: -100%;
-    background-color: #333;
+    top: 80px;
+    right: 0;
     width: 100%;
-    height: calc(100vh - 60px);
+    height: 100vh;
+    background-color: #222;
     flex-direction: column;
     align-items: center;
-    transition: right 0.3s ease;
+    justify-content: flex-start;
+    transform: translateX(100%);
+    transition: transform 0.3s ease-in-out;
+    padding-top: 30px;
   }
 
   .navbar__menu.active {
-    right: 0;
+    transform: translateX(0);
   }
 
-  .navbar_item {
+  .navbar_links {
+    font-size: 20px;
+    padding: 15px;
     width: 100%;
     text-align: center;
   }
 
-  .navbar_links {
-    width: 100%;
-    padding: 20px;
-  }
-  .photos img {
-    width: 100%;
-    height: auto;
+  .bar {
+    background-color: #fff;
   }
 }
+
 @media screen and (max-width:800px) {
   img {
     width: 300px;
