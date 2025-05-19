@@ -166,7 +166,7 @@ footer {
   text-decoration: none;
   padding: 20px 10px;
   display: block;
-  transition: background 0.3s;
+  transition:  0.3s;
 }
 
 .navbar_links:hover {
@@ -219,5 +219,21 @@ footer {
   .navbar_links {
     width: 100%;
     padding: 20px;
+  }
+  .photos img {
+    width: 100%;
+    height: auto;
+  }
+}
+@media screen and (max-width:800px) {
+  img {
+    width: 300px;
+    height: auto;
+  }
+}
+@media screen and(max-width:900px) {
+  .photos img {
+    width: 50%;
+    margin: 6px;
   }
 }
