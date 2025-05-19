@@ -5,6 +5,9 @@
   <title>المنتجات</title>
   <link rel="stylesheet" type="text/css" href="style.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    h2 { color: #343131;}
+  </style>
 </head>
 <body>
   <header class="center-content">
@@ -19,8 +22,8 @@
         </div>
         <ul class="navbar__menu">
           <li class="navbar_item"><a href="index.html" class="navbar_links">الرئيسية</a></li>
-          <li class="navbar_item"><a href="about.html" class="navbar_links">من نحن</a></li>
           <li class="navbar_item"><a href="products.html" class="navbar_links">المنتجات</a></li>
+          <li class="navbar_item"><a href="about.html" class="navbar_links">من نحن</a></li>
           <li class="navbar_item"><a href="cart.html" class="navbar_links">السلة</a></li>
           <li class="navbar_item"><a href="contact.html" class="navbar_links">اتصل بنا</a></li>
           <li class="navbar_item"><a href="event.html" class="navbar_links">الحدث</a></li>
@@ -32,7 +35,7 @@
   <main class="center-content">
     
     
-      <h1>إضافة منتج جديد</h1>
+      <h2>إضافة منتج جديد</h2>
     <form onsubmit="event.preventDefault(); addProduct();">
       <input type="text" id="productName" placeholder="اسم المنتج">
       <input type="number" id="productPrice" placeholder="السعر">
