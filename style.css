@@ -107,3 +107,19 @@ body {
     margin: 6px;
   }
 }
+#navbar__logo {
+  color: #fff;
+  font-size: 24px; /* عدّل الرقم لتكبير/تصغير النص */
+  text-decoration: none;
+  font-weight: bold;
+  padding: 10px;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+/* لو كان اللوقو صورة بدل نص */
+#navbar__logo img {
+  height: 40px; /* صغّر ارتفاع الصورة */
+  width: auto;  /* يحافظ على التناسق */
+}
+
