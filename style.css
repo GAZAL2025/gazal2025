@@ -136,16 +136,17 @@ sit-titel{
 @media screen and (max-width: 768px) {
   .navbar__toggle {
     display: flex;
-    order: 0;
+    order: 3;
     margin-left:0;
   }
   .site-titel {
     order: 2;
-    flex-grow: 1;
+    font-size: 20px;
     text-align: center;
+    flex: 1;
   }
   .navbar_container{ 
-    flex-direction: row;
+    flex-direction: row-reverse;
     justify-content: space-between;
     align-items: center;
   }
@@ -167,6 +168,8 @@ sit-titel{
   main {
     margin-top: 140px;
   }
+  #navbar__logo {
+    order: 1;
 }
 
 footer {
