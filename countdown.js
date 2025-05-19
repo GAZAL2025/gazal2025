@@ -20,12 +20,6 @@ function updateCountdown() {
   countdownEl.innerText = `${days} يوم ${hours} ساعة ${minutes} دقيقة ${seconds} ثانية`;
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  if (document.getElementById('countdown')) {
-    updateCountdown();
-    setInterval(updateCountdown, 1000);
-  }
-});
 const menu = document.querySelector('#mobile-menu');
 const menuLinks = document.querySelector('.navbar__menu');
 
