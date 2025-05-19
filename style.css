@@ -47,7 +47,9 @@ main {
   color: white;
   font-family: 24px;
 }
-
+sit-titel{
+  order: 1;
+}
 .navbar {
   width: 100%;
   background-color: #333;
@@ -118,6 +120,7 @@ main {
   display: none;
   flex-direction: column;
   cursor: pointer;
+  order: 2;
 }
 
 .bar {
@@ -131,8 +134,11 @@ main {
 @media screen and (max-width: 768px) {
   .navbar__toggle {
     display: flex;
+    order: 1;
   }
-
+  .site-titel {
+    order: 2;
+  }
   .navbar__menu {
     display: none;
     flex-direction: column;
@@ -147,12 +153,19 @@ main {
   .navbar__menu.active {
     display: flex;
   }
-   main {
-    margin-top: 180px;
+  main {
+    margin-top: 140px;
   }
 }
 
 footer {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  margin-top: auto;
+}
+
   background-color: #333;
   color: white;
   text-align: center;
