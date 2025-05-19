@@ -1,8 +1,9 @@
-// Firebase
+// إعداد Firebase
 import { initializeApp } from "firebase/app";
 import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc } from "firebase/firestore";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
-// إعداد Firebase
+// تكوين Firebase
 const firebaseConfig = {
   apiKey: "AIzaSyD7H0KEqtBx4TFQX80jFbYbnoiN8HBOUD0",
   authDomain: "ghazal-2025.firebaseapp.com",
@@ -12,40 +13,14 @@ const firebaseConfig = {
   appId: "1:991237133972:web:ee881d54f94e7d20690681"
 };
 
+// التهيئة
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const productsRef = collection(db, "products");
+const storage = getStorage(app);
 
-// عرض المنتجات عند تحميل الصفحة
-window.onload = displayProducts;
-
-// عرض المنتجات
-async function displayProducts() {
-  const container = document.getElementById("productList");
-  if (!container) return;
-
-  container.innerHTML = "";
-  const snapshot = await getDocs(productsRef);
-
-  snapshot.forEach((docSnap) => {
-    const product = docSnap.data();
-    const id = docSnap.id;
-
-    const div = document.createElement("div");
-    div.className = "product";
-    div.innerHTML = `
-      <img src="${product.image}" width="100" />
-      <h3>${product.name}</h3>
-      <p>السعر: ${product.price} ريال</p>
-      <button onclick="addToCart('${id}', '${product.name}', '${product.price}', '${product.image}')">أضف إلى السلة</button>
-      <button onclick="deleteProduct('${id}')">حذف المنتج</button>
-    `;
-    container.appendChild(div);
-  });
-}
-
-// إضافة منتج جديد
-async function addProduct() {
+// دالة لإضافة منتج
+export async function addProduct() {
   const name = document.getElementById("productName").value.trim();
   const price = parseFloat(document.getElementById("productPrice").value);
   const imageInput = document.getElementById("productImage");
@@ -56,29 +31,75 @@ async function addProduct() {
     return;
   }
 
-  const reader = new FileReader();
-  reader.onload = async function (e) {
-    const imageBase64 = e.target.result;
+  // رفع الصورة إلى Firebase Storage
+  const storageRef = ref(storage, `product-images/${file.name}`);
+  await uploadBytes(storageRef, file);
+  const imageUrl = await getDownloadURL(storageRef);
 
-    await addDoc(productsRef, {
-      name,
-      price,
-      image: imageBase64
-    });
+  // إضافة المنتج إلى Firestore
+  await addDoc(productsRef, {
+    name,
+    price,
+    image: imageUrl
+  });
 
-    displayProducts();
-    document.getElementById("productName").value = "";
-    document.getElementById("productPrice").value = "";
-    imageInput.value = "";
-  };
-  reader.readAsDataURL(file);
+  // إعادة عرض المنتجات
+  displayProducts();
+
+  // إعادة تعيين الحقول
+  document.getElementById("productName").value = "";
+  document.getElementById("productPrice").value = "";
+  imageInput.value = "";
 }
 
-// حذف منتج
-async function deleteProduct(productId) {
+// دالة لحذف منتج
+export async function deleteProduct(productId) {
   await deleteDoc(doc(db, "products", productId));
   displayProducts();
 }
+
+// دالة لعرض المنتجات
+export async function displayProducts() {
+  const productList = document.getElementById("productList");
+  productList.innerHTML = "";
+
+  const snapshot = await getDocs(productsRef);
+  snapshot.forEach(docSnap => {
+    const data = docSnap.data();
+    const productCard = document.createElement("div");
+    productCard.className = "product-card";
+
+    productCard.innerHTML = `
+      <img src="${data.image}" alt="${data.name}" class="product-img" />
+      <h3>${data.name}</h3>
+      <p>السعر: ${data.price} ريال</p>
+      <button onclick="deleteProductById('${docSnap.id}')">🗑 حذف</button>
+      <button onclick="addToCart('${docSnap.id}', '${data.name}', ${data.price}, '${data.image}')">🛒 أضف للسلة</button>
+    `;
+
+    productList.appendChild(productCard);
+  });
+}
+
+// دالة لتغليف الحذف (لأن onclick يحتاج دالة في window)
+window.deleteProductById = async function (id) {
+  await deleteProduct(id);
+};
+
+// دالة لإضافة منتج إلى السلة
+window.addToCart = function (id, name, price, image) {
+  const cart = JSON.parse(localStorage.getItem("cart")) || [];
+  cart.push({ id, name, price, image });
+  localStorage.setItem("cart", JSON.stringify(cart));
+  alert("تمت إضافة المنتج إلى السلة");
+};
+
+// عند تحميل الصفحة
+window.addEventListener("DOMContentLoaded", () => {
+  displayProducts();
+});
+
+
 
 // السلة محلياً
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
