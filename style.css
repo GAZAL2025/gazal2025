@@ -139,12 +139,7 @@ sit-titel{
     order: 3;
     margin-left:0;
   }
-  .site-titel {
-    order: 2;
-    font-size: 20px;
-    text-align: center;
-    flex: 1;
-  }
+
   .navbar_container{ 
     flex-direction: row-reverse;
     justify-content: space-between;
