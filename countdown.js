@@ -26,8 +26,10 @@ document.addEventListener('DOMContentLoaded', () => {
     setInterval(updateCountdown, 1000);
   }
 });
-// القائمة الجانبية (الهامبرجر)
-function toggleMenu() {
-    const menu = document.getElementById("navMenu");
-    if (menu) menu.classList.toggle("show");
-  }
+const menu = document.querySelector('#mobile-menu');
+const menuLinks = document.querySelector('.navbar__menu');
+
+menu.addEventListener('click', () => {
+  menu.classList.toggle('is-active');
+  menuLinks.classList.toggle('active');
+});
