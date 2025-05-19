@@ -25,8 +25,9 @@ header {
 
 main {
   flex: 1;
-  padding: 100px 20px 20px; /* padding-top معدلة لتفادي تغطية الهيدر */
+  padding-top: 100px 20px 20px;
   text-align: center;
+  
 }
 
 .site-header {
@@ -34,12 +35,9 @@ main {
   color: white;
 }
 
-.header-title {
-  text-align: center;
+.header h1 {
+ text-align: center;
   padding: 5px 0;
-}
-
-.header-title h1 {
   margin: 10px 0;
   color: white;
   font-family: 24px;
