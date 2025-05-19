@@ -147,6 +147,9 @@ main {
   .navbar__menu.active {
     display: flex;
   }
+   main {
+    margin-top: 140px;
+  }
 }
 
 footer {
