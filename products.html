@@ -3,11 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <title>المنتجات</title>
-  <link rel="stylesheet" type="text/css" href="style.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    h2 { color: #343131;}
-  </style>
+  <link rel="stylesheet" type="text/css" href="style.css" />
 </head>
 <body>
   <header class="center-content">
@@ -16,9 +13,7 @@
     <nav class="navbar">
       <div class="navbar__container">
         <div class="navbar__toggle" id="mobile-menu">
-          <span class="bar"></span>
-          <span class="bar"></span>
-          <span class="bar"></span>
+          <span class="bar"></span><span class="bar"></span><span class="bar"></span>
         </div>
         <ul class="navbar__menu">
           <li class="navbar_item"><a href="index.html" class="navbar_links">الرئيسية</a></li>
@@ -33,41 +28,24 @@
   </header>
 
   <main class="center-content">
-    
-    
-      <h2>إضافة منتج جديد</h2>
+     <h2>إضافة منتج جديد</h2>
     <form onsubmit="event.preventDefault(); addProduct();">
-      <input type="text" id="productName" placeholder="اسم المنتج">
-      <input type="number" id="productPrice" placeholder="السعر">
-      <input type="file" id="productImage" accept="image/*">
+      <input type="text" id="productName" placeholder="اسم المنتج" required>
+      <input type="number" id="productPrice" placeholder="السعر" required>
+      <input type="file" id="productImage" accept="image/*" required>
       <button type="submit">إضافة المنتج</button>
     </form>
 
+    <h2>المنتجات المتوفرة</h2>
     <div id="productList" class="products-grid"></div>
   </main>
 
   <footer>
     <p>&copy; غزّل</p>
   </footer>
-  <script src="script.js" type="module" > // Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
 
-// Your web app's Firebase configuration
-const firebaseConfig = {
-  apiKey: "AIzaSyD7H0KEqtBx4TFQX80jFbYbnoiN8HBOUD0",
-  authDomain: "ghazal-2025.firebaseapp.com",
-  projectId: "ghazal-2025",
-  storageBucket: "ghazal-2025.firebasestorage.app",
-  messagingSenderId: "991237133972",
-  appId: "1:991237133972:web:ee881d54f94e7d20690681"
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-</script>
-  <script src="script.js" type="module"></script>
+ 
+ 
    <script src="countdown.js" type="module"></script>
 </body>
 </html>
