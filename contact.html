@@ -3,17 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <title>تواصل معنا</title>
-  <link rel="stylesheet" href="style.css" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-
+  <link rel="stylesheet" type="text/css" href="style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-  <header>
+  <header class="center-content">
     <img src="Y.G.jpg" alt="شعار الشركة" class="logo">
     <h1>تواصل معنا</h1>
-   <nav class="navbar">
+    <nav class="navbar">
       <div class="navbar__container">
-        <a href="index.html" id="navbar__logo">غزّل</a>
         <div class="navbar__toggle" id="mobile-menu">
           <span class="bar"></span>
           <span class="bar"></span>
@@ -21,8 +19,8 @@
         </div>
         <ul class="navbar__menu">
           <li class="navbar_item"><a href="index.html" class="navbar_links">الرئيسية</a></li>
-          <li class="navbar_item"><a href="products.html" class="navbar_links">المنتجات</a></li>
           <li class="navbar_item"><a href="about.html" class="navbar_links">من نحن</a></li>
+          <li class="navbar_item"><a href="products.html" class="navbar_links">المنتجات</a></li>
           <li class="navbar_item"><a href="cart.html" class="navbar_links">السلة</a></li>
           <li class="navbar_item"><a href="contact.html" class="navbar_links">اتصل بنا</a></li>
           <li class="navbar_item"><a href="event.html" class="navbar_links">الحدث</a></li>
@@ -44,7 +42,25 @@
   <footer>
     <p>&copy; غزّل</p>
   </footer>
-<script src="script.js"></script>
+   <script type="module"> // Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyD7H0KEqtBx4TFQX80jFbYbnoiN8HBOUD0",
+  authDomain: "ghazal-2025.firebaseapp.com",
+  projectId: "ghazal-2025",
+  storageBucket: "ghazal-2025.firebasestorage.app",
+  messagingSenderId: "991237133972",
+  appId: "1:991237133972:web:ee881d54f94e7d20690681"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+</script>
+  <script src="script.js" type="module"></script>
   <script>
     function submitComment() {
       const name = document.getElementById('commentName').value.trim();
