@@ -1,36 +1,48 @@
+/* تعيين إعدادات أساسية */
 body {
   margin: 0;
+  padding: 0;
   font-family: 'Arial', sans-serif;
   direction: rtl;
+  background-color: #f9f9f9;
+  color: #333;
 }
 
+/* ====== الشعار ====== */
+#navbar__logo {
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+  text-decoration: none;
+  padding: 10px 20px;
+  display: inline-block;
+}
+
+/* لو كان الشعار صورة */
+#navbar__logo img {
+  height: 40px;
+  width: auto;
+  vertical-align: middle;
+}
+
+/* ====== شريط التنقل ====== */
 .navbar {
-  background-color: #222;
-  height: 80px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 20px;
+  background-color: #333;
+  padding: 10px 20px;
   position: relative;
 }
 
 .navbar__container {
-  width: 100%;
   display: flex;
-  align-items: center;
   justify-content: space-between;
-}
-
-#navbar__logo {
-  color: #fff;
-  font-size: 24px;
-  text-decoration: none;
-  font-weight: bold;
+  align-items: center;
 }
 
 .navbar__menu {
   display: flex;
   list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 .navbar_item {
@@ -38,88 +50,115 @@ body {
 }
 
 .navbar_links {
-  color: #fff;
+  color: white;
   text-decoration: none;
-  font-size: 18px;
-  padding: 10px 15px;
+  padding: 8px 12px;
+  display: block;
+  transition: background-color 0.3s;
 }
 
+.navbar_links:hover {
+  background-color: #555;
+  border-radius: 5px;
+}
+
+/* ====== زر القائمة (الهامبرغر) للجوال ====== */
 .navbar__toggle {
   display: none;
+  flex-direction: column;
   cursor: pointer;
 }
 
-.bar {
-  display: block;
-  width: 25px;
+.navbar__toggle .bar {
   height: 3px;
-  margin: 5px auto;
-  background-color: #fff;
-  transition: 0.3s;
+  width: 25px;
+  background-color: white;
+  margin: 4px 0;
 }
 
-/* Responsive */
+/* ====== القائمة في الجوال ====== */
 @media screen and (max-width: 768px) {
   .navbar__toggle {
-    display: block;
+    display: flex;
   }
 
   .navbar__menu {
+    flex-direction: column;
     position: absolute;
-    top: 80px;
+    top: 60px;
     right: 0;
     width: 100%;
-    height: 100vh;
-    background-color: #222;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    transform: translateX(100%);
-    transition: transform 0.3s ease-in-out;
-    padding-top: 30px;
+    background-color: #333;
+    display: none;
   }
 
   .navbar__menu.active {
-    transform: translateX(0);
+    display: flex;
   }
 
-  .navbar_links {
-    font-size: 20px;
-    padding: 15px;
-    width: 100%;
+  .navbar_item {
     text-align: center;
-  }
-
-  .bar {
-    background-color: #fff;
+    margin: 10px 0;
   }
 }
 
-@media screen and (max-width:800px) {
-  img {
-    width: 300px;
-    height: auto;
-  }
+/* ====== محتوى رئيسي ====== */
+main.center-content {
+  padding: 20px;
+  max-width: 1000px;
+  margin: auto;
 }
-@media screen and(max-width:900px) {
-  .photos img {
-    width: 50%;
-    margin: 6px;
-  }
+
+/* ====== شبكة المنتجات ====== */
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
 }
-#navbar__logo {
-  color: #fff;
-  font-size: 24px; /* عدّل الرقم لتكبير/تصغير النص */
-  text-decoration: none;
-  font-weight: bold;
+
+.product {
+  background-color: white;
   padding: 10px;
-  line-height: 1;
-  white-space: nowrap;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  text-align: center;
 }
 
-/* لو كان اللوقو صورة بدل نص */
-#navbar__logo img {
-  height: 40px; /* صغّر ارتفاع الصورة */
-  width: auto;  /* يحافظ على التناسق */
+.product img {
+  max-width: 100%;
+  height: auto;
 }
 
+/* ====== عناصر النموذج ====== */
+form input,
+form button {
+  display: block;
+  width: 100%;
+  margin: 10px 0;
+  padding: 8px;
+  font-size: 16px;
+}
+
+form button {
+  background-color: #333;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+form button:hover {
+  background-color: #555;
+}
+
+/* ====== الفوتر ====== */
+footer {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 15px;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  margin-top: 40px;
+}
