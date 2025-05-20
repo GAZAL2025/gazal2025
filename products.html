@@ -32,29 +32,16 @@
 
   <main class="center-content">
     <h2>إضافة منتج جديد</h2>
-    <form id="productForm">
-      <input type="text" id="productName" placeholder="اسم المنتج" required>
-      <input type="number" id="productPrice" placeholder="السعر" required>
-      <input type="file" id="productImage" accept="image/*" required>
-     <button id="addProductBtn" type="button">إضافة المنتج</button>
-    </form>
+   <form id="productForm">
+  <input type="text" id="productName" placeholder="اسم المنتج" required />
+  <input type="number" id="productPrice" placeholder="السعر" required />
+  <input type="file" id="productImage" accept="image/*" required />
+  <button type="submit">إضافة المنتج</button>
+</form>
 
     <h2>المنتجات المتوفرة</h2>
     <div id="productList" class="products-grid"></div>
   </main>
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const addButton = document.getElementById("addProductBtn");
-    if (addButton) {
-      addButton.addEventListener("click", async () => {
-        alert("زر الإضافة تم الضغط عليه");
-        await addProduct();
-      });
-    } else {
-      alert("الزر غير موجود!");
-    }
-  });
-</script>
 
   <footer>
     <p>&copy; غزّل</p>
