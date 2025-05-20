@@ -57,7 +57,7 @@ export async function addProduct() {
 // دالة لعرض المنتجات
 export async function displayProducts() {
   const productList = document.getElementById("productList");
-  productList.innerHTML = "";
+  productList.innerHTML = ""; // تفريغ القائمة
 
   const snapshot = await getDocs(productsRef);
   snapshot.forEach(docSnap => {
@@ -66,7 +66,7 @@ export async function displayProducts() {
     productCard.className = "product-card";
 
     productCard.innerHTML = `
-      <img src="${data.image || 'placeholder.jpg'}" alt="${data.name}" class="product-img" />
+      <img src="${data.image}" alt="${data.name}" class="product-img" />
       <h3>${data.name}</h3>
       <p>السعر: ${data.price} ريال</p>
       <button onclick="deleteProductById('${docSnap.id}')">🗑 حذف</button>
@@ -76,6 +76,7 @@ export async function displayProducts() {
     productList.appendChild(productCard);
   });
 }
+
 
 // حذف منتج
 export async function deleteProduct(productId) {
