@@ -46,6 +46,19 @@
   <footer>
     <p>&copy; غزّل</p>
   </footer>
+  <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const button = document.getElementById("addProductBtn");
+    if (button) {
+      button.addEventListener("click", () => {
+        alert("زر الإضافة يعمل!");
+      });
+    } else {
+      alert("الزر غير موجود!");
+    }
+  });
+</script>
+
  <script type="module" src="script.js"></script>
 <script src="countdown.js"></script>
 </body>
