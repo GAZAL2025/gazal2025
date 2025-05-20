@@ -32,6 +32,16 @@ async function addProduct(name, price, imageBase64) {
 }
 
 // عرض المنتجات
+document.addEventListener("DOMContentLoaded", () => {
+  const addButton = document.getElementById("addProductBtn");
+  if (addButton) {
+    addButton.addEventListener("click", async () => {
+      alert("زر الإضافة تم الضغط عليه");
+      await addProduct(); // نفذ دالة الإضافة
+    });
+  }
+});
+
 async function displayProducts() {
   const productList = document.getElementById("productList");
   productList.innerHTML = "";
