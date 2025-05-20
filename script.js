@@ -115,3 +115,8 @@ window.addToCart = function (id, name, price, image) {
 window.addEventListener("DOMContentLoaded", () => {
   displayProducts();
 });
+document.getElementById("productForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+  addProduct();
+});
+
