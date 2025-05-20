@@ -1,9 +1,14 @@
-// إعداد Firebase
-import { initializeApp } from "firebase/app";
-import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc } from "firebase/firestore";
-import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  getDocs,
+  deleteDoc,
+  doc
+} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-// تكوين Firebase
+// إعداد Firebase
 const firebaseConfig = {
   apiKey: "AIzaSyD7H0KEqtBx4TFQX80jFbYbnoiN8HBOUD0",
   authDomain: "ghazal-2025.firebaseapp.com",
@@ -13,112 +18,90 @@ const firebaseConfig = {
   appId: "1:991237133972:web:ee881d54f94e7d20690681"
 };
 
-// التهيئة
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const productsRef = collection(db, "products");
-const storage = getStorage(app);
 
-// دالة لإضافة منتج
-export async function addProduct() {
-  const name = document.getElementById("productName").value.trim();
-  const price = parseFloat(document.getElementById("productPrice").value);
-  const imageInput = document.getElementById("productImage");
-  const file = imageInput.files[0];
-
-  if (!name || isNaN(price) || !file) {
-    alert("يرجى إدخال كل البيانات.");
-    return;
-  }
-
-  // رفع الصورة إلى Firebase Storage
-  const storageRef = ref(storage, `product-images/${file.name}`);
-  await uploadBytes(storageRef, file);
-  const imageUrl = await getDownloadURL(storageRef);
-
-  // إضافة المنتج إلى Firestore
+// إضافة منتج
+async function addProduct(name, price, imageBase64) {
   await addDoc(productsRef, {
     name,
     price,
-    image: imageUrl
+    image: imageBase64
   });
-
-  // إعادة عرض المنتجات
-  displayProducts();
-
-  // إعادة تعيين الحقول
-  document.getElementById("productName").value = "";
-  document.getElementById("productPrice").value = "";
-  imageInput.value = "";
 }
 
-// دالة لحذف منتج
-export async function deleteProduct(productId) {
-  await deleteDoc(doc(db, "products", productId));
-  displayProducts();
-}
-
-// دالة لعرض المنتجات
-export async function displayProducts() {
+// عرض المنتجات
+async function displayProducts() {
   const productList = document.getElementById("productList");
   productList.innerHTML = "";
 
   const snapshot = await getDocs(productsRef);
   snapshot.forEach(docSnap => {
     const data = docSnap.data();
-    const productCard = document.createElement("div");
-    productCard.className = "product-card";
-
-    productCard.innerHTML = `
+    const card = document.createElement("div");
+    card.className = "product-card";
+    card.innerHTML = `
       <img src="${data.image}" alt="${data.name}" class="product-img" />
       <h3>${data.name}</h3>
       <p>السعر: ${data.price} ريال</p>
-      <button onclick="deleteProductById('${docSnap.id}')">🗑 حذف</button>
-      <button onclick="addToCart('${docSnap.id}', '${data.name}', ${data.price}, '${data.image}')">🛒 أضف للسلة</button>
+      <button class="delete-btn" data-id="${docSnap.id}">🗑 حذف</button>
+      <button class="cart-btn" data-id="${docSnap.id}">🛒 أضف للسلة</button>
     `;
+    productList.appendChild(card);
+  });
 
-    productList.appendChild(productCard);
+  document.querySelectorAll(".delete-btn").forEach(button => {
+    button.addEventListener("click", async (e) => {
+      const id = e.target.dataset.id;
+      await deleteDoc(doc(db, "products", id));
+      displayProducts();
+    });
+  });
+
+  document.querySelectorAll(".cart-btn").forEach(button => {
+    button.addEventListener("click", (e) => {
+      const id = e.target.dataset.id;
+      const card = e.target.closest(".product-card");
+      const name = card.querySelector("h3").textContent;
+      const price = parseFloat(card.querySelector("p").textContent.replace(/[^\d]/g, ''));
+      const image = card.querySelector("img").src;
+
+      const cart = JSON.parse(localStorage.getItem("cart")) || [];
+      cart.push({ id, name, price, image });
+      localStorage.setItem("cart", JSON.stringify(cart));
+      alert("تمت إضافة المنتج إلى السلة");
+    });
   });
 }
 
-// دالة لتغليف الحذف (لأن onclick يحتاج دالة في window)
-window.deleteProductById = async function (id) {
-  await deleteProduct(id);
-};
+// عند إرسال النموذج
+document.getElementById("productForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const name = document.getElementById("productName").value.trim();
+  const price = parseFloat(document.getElementById("productPrice").value);
+  const imageInput = document.getElementById("productImage");
+  const file = imageInput.files[0];
 
-// دالة لإضافة منتج إلى السلة
-window.addToCart = function (id, name, price, image) {
-  const cart = JSON.parse(localStorage.getItem("cart")) || [];
-  cart.push({ id, name, price, image });
-  localStorage.setItem("cart", JSON.stringify(cart));
-  alert("تمت إضافة المنتج إلى السلة");
-};
+  if (!name || isNaN(price) || !file) {
+    alert("يرجى تعبئة جميع الحقول");
+    return;
+  }
 
-// عند تحميل الصفحة
+  const reader = new FileReader();
+  reader.onload = async function (e) {
+    const imageBase64 = e.target.result;
+    await addProduct(name, price, imageBase64);
+    document.getElementById("productForm").reset();
+    displayProducts();
+  };
+  reader.readAsDataURL(file);
+});
+
+// عرض المنتجات عند التحميل
 window.addEventListener("DOMContentLoaded", () => {
   displayProducts();
 });
-
-
-
-// السلة محلياً
-let cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-function saveCart() {
-  localStorage.setItem("cart", JSON.stringify(cart));
-}
-
-function addToCart(id, name, price, image) {
-  const existing = cart.find(p => p.id === id);
-  if (existing) {
-    existing.quantity++;
-  } else {
-    cart.push({ id, name, price: parseFloat(price), image, quantity: 1 });
-  }
-  saveCart();
-  alert("تمت إضافة المنتج إلى السلة");
-}
-
 function displayCartItems() {
   const container = document.getElementById("cartItems");
   const totalEl = document.getElementById("totalPrice");
@@ -149,5 +132,3 @@ function removeFromCart(id) {
   saveCart();
   displayCartItems();
 }
-
-
