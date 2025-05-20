@@ -5,8 +5,6 @@
   <title>المنتجات</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" type="text/css" href="style.css" />
-   <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore-compat.js"></script>
 </head>
 <body>
   <header class="center-content">
@@ -31,35 +29,22 @@
 
   <main class="center-content">
     <h2>إضافة منتج جديد</h2>
-<form id="productForm">
-  <input type="text" id="productName" placeholder="اسم المنتج" required>
-  <input type="number" id="productPrice" placeholder="السعر" required>
-  <input type="file" id="productImage" accept="image/*" required>
-  <button type="submit" id="addProductBtn">إضافة المنتج</button>
-</form>
-
+    <form id="productForm">
+      <input type="text" id="productName" placeholder="اسم المنتج" required>
+      <input type="number" id="productPrice" placeholder="السعر" required>
+      <input type="file" id="productImage" accept="image/*" required>
+      <button type="submit">إضافة المنتج</button>
+    </form>
 
     <h2>المنتجات المتوفرة</h2>
-     <div id="productList" class="products-grid"></div>
+    <div id="productList" class="products-grid"></div>
   </main>
 
   <footer>
     <p>&copy; غزّل</p>
   </footer>
-  <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const button = document.getElementById("addProductBtn");
-    if (button) {
-      button.addEventListener("click", () => {
-        alert("زر الإضافة يعمل!");
-      });
-    } else {
-      alert("الزر غير موجود!");
-    }
-  });
-</script>
 
- <script type="module" src="script.js"></script>
-<script src="countdown.js"></script>
+  <script type="module" src="script.js"></script>
+   <script type="module" src="countdown.js"></script>
 </body>
 </html>
