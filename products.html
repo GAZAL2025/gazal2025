@@ -42,6 +42,19 @@
     <h2>المنتجات المتوفرة</h2>
     <div id="productList" class="products-grid"></div>
   </main>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const addButton = document.getElementById("addProductBtn");
+    if (addButton) {
+      addButton.addEventListener("click", async () => {
+        alert("زر الإضافة تم الضغط عليه");
+        await addProduct();
+      });
+    } else {
+      alert("الزر غير موجود!");
+    }
+  });
+</script>
 
   <footer>
     <p>&copy; غزّل</p>
