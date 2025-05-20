@@ -66,7 +66,7 @@ export async function displayProducts() {
     productCard.className = "product-card";
 
     productCard.innerHTML = `
-      <img src="${data.image}" alt="${data.name}" class="product-img" />
+      <img src="${data.image || 'default-image.png'}" alt="${data.name}" class="product-img" />
       <h3>${data.name}</h3>
       <p>السعر: ${data.price} ريال</p>
       <button onclick="deleteProductById('${docSnap.id}')">🗑 حذف</button>
