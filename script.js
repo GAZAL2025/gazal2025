@@ -1,8 +1,4 @@
 // إعداد Firebase
-import { initializeApp } from "firebase/app";
-import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc } from "firebase/firestore";
-
-// تكوين Firebase
 const firebaseConfig = {
   apiKey: "AIzaSyD7H0KEqtBx4TFQX80jFbYbnoiN8HBOUD0",
   authDomain: "ghazal-2025.firebaseapp.com",
@@ -12,66 +8,56 @@ const firebaseConfig = {
   appId: "1:991237133972:web:ee881d54f94e7d20690681"
 };
 
-// التهيئة
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-const productsRef = collection(db, "products");
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+const productsRef = db.collection("products");
 
 // دالة لإضافة منتج
-export async function addProduct() {
+function addProduct() {
   const name = document.getElementById("productName").value.trim();
   const price = parseFloat(document.getElementById("productPrice").value);
   const imageInput = document.getElementById("productImage");
   const file = imageInput.files[0];
 
   if (!name || isNaN(price) || !file) {
-    alert("يرجى إدخال كل البيانات واختيار صورة.");
+    alert("يرجى تعبئة كل الحقول بشكل صحيح");
     return;
   }
 
-  alert("📤 جاري رفع المنتج...");
-
-  // قراءة الصورة كـ Base64
   const reader = new FileReader();
-
   reader.onload = async function (e) {
     const imageBase64 = e.target.result;
 
     try {
-      await addDoc(productsRef, {
+      await productsRef.add({
         name,
         price,
         image: imageBase64
       });
 
-      displayProducts();
+      alert("تمت إضافة المنتج بنجاح");
       document.getElementById("productName").value = "";
       document.getElementById("productPrice").value = "";
       imageInput.value = "";
-      alert("✅ تم إضافة المنتج بنجاح!");
+      displayProducts();
     } catch (error) {
-      console.error("فشل إضافة المنتج:", error);
-      alert("❌ حدث خطأ أثناء حفظ المنتج. حاول مرة أخرى.");
+      console.error("خطأ أثناء إضافة المنتج:", error);
+      alert("حدث خطأ أثناء إضافة المنتج");
     }
-  };
-
-  reader.onerror = function (err) {
-    console.error("فشل في قراءة الصورة:", err);
-    alert("❌ حدث خطأ أثناء تحميل الصورة. حاول مرة أخرى.");
   };
 
   reader.readAsDataURL(file);
 }
 
-// دالة لعرض المنتجات
-export async function displayProducts() {
+// دالة عرض المنتجات
+async function displayProducts() {
   const productList = document.getElementById("productList");
   productList.innerHTML = "";
 
   try {
-    const snapshot = await getDocs(productsRef);
-    snapshot.forEach(docSnap => {
-      const data = docSnap.data();
+    const snapshot = await productsRef.get();
+    snapshot.forEach(doc => {
+      const data = doc.data();
       const productCard = document.createElement("div");
       productCard.className = "product-card";
 
@@ -79,49 +65,43 @@ export async function displayProducts() {
         <img src="${data.image}" alt="${data.name}" class="product-img" />
         <h3>${data.name}</h3>
         <p>السعر: ${data.price} ريال</p>
-        <button onclick="deleteProductById('${docSnap.id}')">🗑 حذف</button>
-        <button onclick="addToCart('${docSnap.id}', '${data.name}', ${data.price}, '${data.image}')">🛒 أضف للسلة</button>
+        <button onclick="deleteProductById('${doc.id}')">🗑 حذف</button>
+        <button onclick="addToCart('${doc.id}', '${data.name}', ${data.price}, '${data.image}')">🛒 أضف للسلة</button>
       `;
 
       productList.appendChild(productCard);
     });
   } catch (error) {
-    console.error("خطأ في جلب المنتجات:", error);
-    alert("❌ لم نتمكن من تحميل المنتجات. تأكد من الاتصال بالإنترنت.");
+    console.error("فشل تحميل المنتجات:", error);
   }
 }
 
 // حذف منتج
-export async function deleteProduct(productId) {
+async function deleteProductById(productId) {
   try {
-    await deleteDoc(doc(db, "products", productId));
+    await productsRef.doc(productId).delete();
     displayProducts();
   } catch (error) {
-    console.error("فشل حذف المنتج:", error);
-    alert("❌ لم يتم حذف المنتج. حدث خطأ.");
+    console.error("خطأ أثناء الحذف:", error);
   }
 }
 
-// السماح بالوصول من HTML
-window.deleteProductById = deleteProduct;
-
-window.addToCart = function (id, name, price, image) {
+// إضافة للسلة
+function addToCart(id, name, price, image) {
   const cart = JSON.parse(localStorage.getItem("cart")) || [];
   cart.push({ id, name, price, image });
   localStorage.setItem("cart", JSON.stringify(cart));
-  alert("✅ تمت إضافة المنتج إلى السلة");
-};
+  alert("تمت إضافة المنتج إلى السلة");
+}
 
-window.addEventListener("DOMContentLoaded", () => {
+// تشغيل عند تحميل الصفحة
+document.addEventListener("DOMContentLoaded", () => {
   displayProducts();
+  window.deleteProductById = deleteProductById;
+  window.addToCart = addToCart;
+  window.addProduct = addProduct;
 });
-document.getElementById("productForm").addEventListener("submit", function(e) {
-  e.preventDefault();
-  addProduct();
-});
-window.addEventListener("DOMContentLoaded", () => {
-  displayProducts();
-});
+
 function displayCartItems() {
   const container = document.getElementById("cartItems");
   const totalEl = document.getElementById("totalPrice");
