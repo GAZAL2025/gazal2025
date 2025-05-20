@@ -70,7 +70,7 @@ export async function displayProducts() {
       <h3>${data.name}</h3>
       <p>السعر: ${data.price} ريال</p>
       <button onclick="deleteProductById('${docSnap.id}')">🗑 حذف</button>
-      <button onclick="addToCart('${docSnap.id}', '${data.name}', ${data.price}, '${data.image}')">🛒 أضف للسلة</button>
+  <button onclick="addToCart('${docSnap.id}', '${data.name}', ${data.price}, '${data.image}')">🛒 أضف للسلة</button>
     `;
 
     productList.appendChild(productCard);
