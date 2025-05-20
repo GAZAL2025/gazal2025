@@ -35,6 +35,11 @@ function removeFromCart(id) {
   displayCartItems();
 }
 
+// ✅ السماح باستخدام الدالة في HTML
+window.removeFromCart = removeFromCart;
+
+// ✅ عرض المنتجات عند وجود العنصر في الصفحة
 if (document.getElementById("cartItems")) {
   displayCartItems();
 }
+
