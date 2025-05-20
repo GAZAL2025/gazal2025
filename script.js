@@ -104,6 +104,7 @@ document.getElementById("productForm").addEventListener("submit", async (e) => {
 window.addEventListener("DOMContentLoaded", () => {
   displayProducts();
 });
+
 function displayCartItems() {
   const container = document.getElementById("cartItems");
   const totalEl = document.getElementById("totalPrice");
