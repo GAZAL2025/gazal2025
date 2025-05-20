@@ -32,15 +32,21 @@
 
   <main class="center-content">
     <h2>إضافة منتج جديد</h2>
-   <form id="productForm">
-  <input type="text" id="productName" placeholder="اسم المنتج" required />
-  <input type="number" id="productPrice" placeholder="السعر" required />
-  <input type="file" id="productImage" accept="image/*" required />
-  <button type="submit">إضافة المنتج</button>
-</form>
+    <form id="productForm">
+    <label for="productName">اسم المنتج:</label>
+    <input type="text" id="productName" required placeholder="أدخل اسم المنتج" />
+
+    <label for="productPrice">السعر (ريال):</label>
+    <input type="number" id="productPrice" required min="0" step="0.01" placeholder="أدخل سعر المنتج" />
+
+    <label for="productImage">صورة المنتج:</label>
+    <input type="file" id="productImage" accept="image/*" required />
+
+    <button type="submit">إضافة المنتج</button>
+  </form>
 
     <h2>المنتجات المتوفرة</h2>
-    <div id="productList" class="products-grid"></div>
+    <div id="productList"></div>
   </main>
 
   <footer>
@@ -48,7 +54,124 @@
   </footer>
 <script type="module">
   alert("الجافاسكربت لا يعمل ✅");
-</script>
+ <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import {
+      getFirestore,
+      collection,
+      getDocs,
+      addDoc,
+      deleteDoc,
+      doc
+    } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+    // إعداد Firebase
+    const firebaseConfig = {
+      apiKey: "AIzaSyD7H0KEqtBx4TFQX80jFbYbnoiN8HBOUD0",
+      authDomain: "ghazal-2025.firebaseapp.com",
+      projectId: "ghazal-2025",
+      storageBucket: "ghazal-2025.appspot.com",
+      messagingSenderId: "991237133972",
+      appId: "1:991237133972:web:ee881d54f94e7d20690681"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const productsRef = collection(db, "products");
+
+    // إضافة منتج إلى Firestore
+    async function addProduct(name, price, imageBase64) {
+      await addDoc(productsRef, {
+        name,
+        price,
+        image: imageBase64
+      });
+    }
+
+    // عرض المنتجات من Firestore
+    async function displayProducts() {
+      const productList = document.getElementById("productList");
+      productList.innerHTML = "";
+
+      const snapshot = await getDocs(productsRef);
+      snapshot.forEach(docSnap => {
+        const data = docSnap.data();
+        const card = document.createElement("div");
+        card.className = "product-card";
+        card.innerHTML = `
+          <img src="${data.image || 'default-image.png'}" alt="${data.name}" class="product-img" />
+          <h3>${data.name}</h3>
+          <p>السعر: ${data.price} ريال</p>
+          <button class="delete-btn" data-id="${docSnap.id}">🗑 حذف</button>
+          <button class="cart-btn" data-id="${docSnap.id}">🛒 أضف للسلة</button>
+        `;
+        productList.appendChild(card);
+      });
+
+      // تفعيل أزرار الحذف
+      document.querySelectorAll(".delete-btn").forEach(button => {
+        button.addEventListener("click", async (e) => {
+          const id = e.target.dataset.id;
+          await deleteDoc(doc(db, "products", id));
+          displayProducts();
+        });
+      });
+
+      // تفعيل أزرار إضافة للسلة
+      document.querySelectorAll(".cart-btn").forEach(button => {
+        button.addEventListener("click", (e) => {
+          const id = e.target.dataset.id;
+          const card = e.target.closest(".product-card");
+          const name = card.querySelector("h3").textContent;
+          const price = parseFloat(card.querySelector("p").textContent.replace(/[^\d.]/g, ''));
+          const image = card.querySelector("img").src;
+
+          const cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+          // تحقق إذا المنتج موجود مسبقًا لزيادة العدد أو إضافته جديدًا
+          const existingIndex = cart.findIndex(item => item.id === id);
+          if (existingIndex !== -1) {
+            cart[existingIndex].quantity += 1;
+          } else {
+            cart.push({ id, name, price, image, quantity: 1 });
+          }
+
+          localStorage.setItem("cart", JSON.stringify(cart));
+          alert("تمت إضافة المنتج إلى السلة");
+        });
+      });
+    }
+
+    // التعامل مع إرسال النموذج
+    document.getElementById("productForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const name = document.getElementById("productName").value.trim();
+      const price = parseFloat(document.getElementById("productPrice").value);
+      const imageInput = document.getElementById("productImage");
+      const file = imageInput.files[0];
+
+      if (!name || isNaN(price) || !file) {
+        alert("يرجى تعبئة جميع الحقول");
+        return;
+      }
+
+      // قراءة الصورة وتحويلها إلى Base64
+      const reader = new FileReader();
+      reader.onload = async function (event) {
+        const imageBase64 = event.target.result;
+        await addProduct(name, price, imageBase64);
+        alert("تمت إضافة المنتج بنجاح!");
+        document.getElementById("productForm").reset();
+        displayProducts();
+      };
+      reader.readAsDataURL(file);
+    });
+
+    // عرض المنتجات عند تحميل الصفحة
+    window.addEventListener("DOMContentLoaded", () => {
+      displayProducts();
+    });
+  </script>
   <script type="module" src="script.js"></script>
    <script type="module" src="countdown.js"></script>
 </body>
